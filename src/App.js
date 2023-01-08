@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './components';
 import { Cart, Home } from './pages';
@@ -8,13 +8,12 @@ import { setPizzas } from './redux/action/pizzas';
 
 const App = () => {
   const dispatch = useDispatch();
-  const hran = useSelector((state) => state);
-  console.log(hran);
-
   useEffect(() => {
-    axios.get('http://localhost:3000/db.json').then(({ data }) => {
-      dispatch(setPizzas(data.pizzas));
-    });
+    axios
+      .get('http://localhost:3001/pizzas')
+      .then(({data}) => {
+        dispatch(setPizzas(data));
+      });
     // eslint-disable-next-line
   }, []); /* Пустой массив, как второй аргумент, означает единоразовый вызов функции внутри хука при первой визуализации компонента */
 
@@ -24,7 +23,7 @@ const App = () => {
         <Header />
         <div className='content'>
           <Routes>
-            <Route path='/' element={<Home items={[]} />} />
+            <Route path='/' element={<Home />} />
             <Route path='/cart' element={<Cart />} />
           </Routes>
         </div>
@@ -32,5 +31,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;

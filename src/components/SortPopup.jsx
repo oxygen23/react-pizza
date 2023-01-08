@@ -1,30 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 
-const SortPopup = ({items}) => {
+const SortPopup = memo(function SortPopup({ items }) {
   const [visiblePopup, setVisiblePopup] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
-  const sortRef = useRef()
-  const activeLabel = items[activeItem].name
-  
+  const sortRef = useRef();
+  const activeLabel = items[activeItem].name;
+
   const toggleVisiblePopup = () => {
-    setVisiblePopup(!visiblePopup) 
-  }
+    setVisiblePopup(!visiblePopup);
+  };
 
   const hanldeOutsideClick = (e) => {
     if (!e.path.includes(sortRef.current)) {
-      setVisiblePopup(false)
+      setVisiblePopup(false);
     }
-  }
+  };
 
   const onSelectItem = (index) => {
     setActiveItem(index);
-    setVisiblePopup(false)
+    setVisiblePopup(false);
   };
 
   useEffect(() => {
     document.body.addEventListener('click', hanldeOutsideClick);
   }, []);
-  
 
   return (
     <div ref={sortRef} className='sort'>
@@ -53,7 +52,6 @@ const SortPopup = ({items}) => {
                 <li
                   className={activeItem === index ? 'active' : ''}
                   onClick={() => onSelectItem(index)}
-                  // eslint-disable-next-line
                   key={`${obj.type}_${index}`}
                 >
                   {obj.name}
@@ -64,6 +62,6 @@ const SortPopup = ({items}) => {
       )}
     </div>
   );
-};
+});
 
 export default SortPopup;

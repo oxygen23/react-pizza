@@ -1,22 +1,9 @@
-import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './components';
 import { Cart, Home } from './pages';
-import { setPizzas } from './redux/action/pizzas';
 
-const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/pizzas')
-      .then(({data}) => {
-        dispatch(setPizzas(data));
-      });
-    // eslint-disable-next-line
-  }, []); /* Пустой массив, как второй аргумент, означает единоразовый вызов функции внутри хука при первой визуализации компонента */
-
+function App() {
   return (
     <div className='App'>
       <div className='wrapper'>
@@ -30,7 +17,5 @@ const App = () => {
       </div>
     </div>
   );
-};
-
-
+} 
 export default App;

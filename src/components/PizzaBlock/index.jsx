@@ -18,6 +18,7 @@ const PizzaBlock = ({
   const onSelectType = (index) => {
     setActiveType(index);
   };
+
   const onSelectSize = (size) => {
     setActiveSize(size);
   };
@@ -79,7 +80,6 @@ const PizzaBlock = ({
   );
 };
 
-
 PizzaBlock.propTypes = {
   imageUrl: PropTypes.string,
   name: PropTypes.string,
@@ -88,14 +88,13 @@ PizzaBlock.propTypes = {
   price: PropTypes.number,
   category: PropTypes.number,
   rating: PropTypes.number,
-}
-
+};
 
 PizzaBlock.defaultProps = {
   name: '---',
   types: [],
   sizes: [],
   price: 0,
-}
+};
 
 export default PizzaBlock;
